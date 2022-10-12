@@ -1,0 +1,31 @@
+library(readr)
+library(ggplot2)
+dat <- read_csv("EconomistData.csv")
+dat$Region <- factor(dat$Region,
+                     levels = c("EU W. Europe",
+                                "Americas",
+                                "Asia Pacific",
+                                "East EU Cemt Asia",
+                                "MENA",
+                                "SSA"),
+                     labels = c("OECD",
+                                "Americas",
+                                "Asia &\nOceania",
+                                "Central &\nEastern Europe",
+                                "Middle East &\nnorth Africa",
+                                "Sub-Saharan\nAfrica"))
+
+ggplot(dat,aes(x=CPI,y=HDI,color=Region))+
+  geom_point()+
+ scale_x_continuous(name="Corruption Perception Index")+
+ scale_y_continuous(name="Human Development Index")+
+scale_color_manual(name="Region of the World",
+                     values =c(
+                       "#24576D",
+                       "#099DD7",
+                       "#28AADC",
+                       "#248E84",
+                       "#F2583F",
+                       "#96503F"))
+  
+  
